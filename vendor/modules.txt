@@ -1,0 +1,3 @@
+# github.com/frk/compare v0.0.6
+## explicit
+github.com/frk/compare

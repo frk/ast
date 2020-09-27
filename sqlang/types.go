@@ -171,8 +171,8 @@ func (c Coalesce) Walk(w *ast.Writer) {
 }
 
 type NULLIF struct {
-	Value Expr
-	Expr  Expr
+	Value ValueExpr
+	Expr  ValueExpr
 }
 
 func (n NULLIF) Walk(w *ast.Writer) {

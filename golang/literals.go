@@ -6,6 +6,13 @@ import (
 	"github.com/frk/ast"
 )
 
+// ValueLit produces the literal value.
+type ValueLit string
+
+func (v ValueLit) Walk(w *ast.Writer) {
+	w.Write(string(v))
+}
+
 // IntLit produces an int literal.
 type IntLit int64
 
@@ -174,6 +181,7 @@ func (x KeyElement) Walk(w *ast.Writer) {
 	x.Value.Walk(w)
 }
 
+func (ValueLit) exprNode()     {}
 func (IntLit) exprNode()       {}
 func (StringLit) exprNode()    {}
 func (RawStringLit) exprNode() {}
@@ -183,6 +191,7 @@ func (MapLit) exprNode()       {}
 func (KeyElement) exprNode()   {}
 func (FuncLit) exprNode()      {}
 
+func (x ValueLit) exprListNode() []ExprNode     { return []ExprNode{x} }
 func (x IntLit) exprListNode() []ExprNode       { return []ExprNode{x} }
 func (x StringLit) exprListNode() []ExprNode    { return []ExprNode{x} }
 func (x RawStringLit) exprListNode() []ExprNode { return []ExprNode{x} }

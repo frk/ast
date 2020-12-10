@@ -31,6 +31,30 @@ func TestIntLit(t *testing.T) {
 	}
 }
 
+func TestRuneLit(t *testing.T) {
+	tests := []struct {
+		lit  RuneLit
+		want string
+	}{
+		{lit: '0', want: `'0'`},
+		{lit: 'å', want: `'å'`},
+		{lit: '世', want: `'世'`},
+	}
+
+	for _, tt := range tests {
+		w := new(bytes.Buffer)
+
+		if err := Write(tt.lit, w); err != nil {
+			t.Error(err)
+		}
+
+		got := w.String()
+		if err := compare.Compare(got, tt.want); err != nil {
+			t.Error(err)
+		}
+	}
+}
+
 func TestStringLit(t *testing.T) {
 	tests := []struct {
 		lit  StringLit

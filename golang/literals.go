@@ -20,6 +20,15 @@ func (i IntLit) Walk(w *ast.Writer) {
 	w.Write(strconv.FormatInt(int64(i), 10))
 }
 
+// RuneLit produces a rune literal.
+type RuneLit rune
+
+func (r RuneLit) Walk(w *ast.Writer) {
+	w.Write(`'`)
+	w.Write(string(r))
+	w.Write(`'`)
+}
+
 // StringLit produces a string literal.
 type StringLit string
 
@@ -187,6 +196,7 @@ func (x KeyElement) Walk(w *ast.Writer) {
 
 func (ValueLit) exprNode()     {}
 func (IntLit) exprNode()       {}
+func (RuneLit) exprNode()      {}
 func (StringLit) exprNode()    {}
 func (RawStringLit) exprNode() {}
 func (SliceLit) exprNode()     {}
@@ -197,6 +207,7 @@ func (FuncLit) exprNode()      {}
 
 func (x ValueLit) exprListNode() []ExprNode     { return []ExprNode{x} }
 func (x IntLit) exprListNode() []ExprNode       { return []ExprNode{x} }
+func (x RuneLit) exprListNode() []ExprNode      { return []ExprNode{x} }
 func (x StringLit) exprListNode() []ExprNode    { return []ExprNode{x} }
 func (x RawStringLit) exprListNode() []ExprNode { return []ExprNode{x} }
 func (x SliceLit) exprListNode() []ExprNode     { return []ExprNode{x} }

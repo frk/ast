@@ -180,19 +180,19 @@ func TestStructLit(t *testing.T) {
 		want: "Foo{}",
 	}, {
 		lit: StructLit{Type: Ident{"Foo"}, Compact: true,
-			Elems: []FieldElement{{"F", StringLit("foobar")}, {"T", IntLit(123)}}},
-		want: `Foo{F: "foobar", T: 123}`,
+			Elems: []FieldElement{{false, "F", StringLit("foobar")}, {true, "T", IntLit(123)}}},
+		want: "Foo{F: \"foobar\", \nT: 123}",
 	}, {
 		lit: StructLit{Type: Ident{"Foo"}, Compact: true,
-			Elems: []FieldElement{{"F", RawStringLit("foobar")}}},
-		want: "Foo{F: `foobar`}",
+			Elems: []FieldElement{{true, "F", RawStringLit("foobar")}}},
+		want: "Foo{\nF: `foobar`}",
 	}, {
 		lit: StructLit{Type: Ident{"Foo"},
-			Elems: []FieldElement{{"F", StringLit("foobar")}, {"T", IntLit(123)}}},
+			Elems: []FieldElement{{false, "F", StringLit("foobar")}, {false, "T", IntLit(123)}}},
 		want: "Foo{\nF: \"foobar\", \nT: 123, \n}",
 	}, {
 		lit: StructLit{Type: Ident{"Foo"}, Elems: []FieldElement{
-			{"T", StructLit{Type: QualifiedIdent{"time", "Time"}}},
+			{false, "T", StructLit{Type: QualifiedIdent{"time", "Time"}}},
 		}},
 		want: "Foo{\nT: time.Time{}, \n}",
 	}}

@@ -128,11 +128,15 @@ func (lit StructLit) Walk(w *ast.Writer) {
 
 // FieldElement produces a field-value pair in a struct literal expression.
 type FieldElement struct {
-	Field string   // field name
-	Value ExprNode // the field's value
+	NewLine bool     // if set, will print the field elem on a new line.
+	Field   string   // field name
+	Value   ExprNode // the field's value
 }
 
 func (e FieldElement) Walk(w *ast.Writer) {
+	if e.NewLine {
+		w.Write("\n")
+	}
 	if len(e.Field) > 0 {
 		w.Write(e.Field)
 		w.Write(": ")

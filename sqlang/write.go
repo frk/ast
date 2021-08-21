@@ -30,3 +30,11 @@ func ToString(n Node) (string, error) {
 	}
 	return b.String(), nil
 }
+
+func MustToString(n Node) string {
+	s, err := ToString(n)
+	if err != nil {
+		panic(err)
+	}
+	return s
+}

@@ -17,6 +17,7 @@ func (typ JoinType) Walk(w *ast.Writer) {
 
 const (
 	JoinNone  JoinType = ""
+	JoinInner JoinType = "INNER JOIN"
 	JoinLeft  JoinType = "LEFT JOIN"
 	JoinRight JoinType = "RIGHT JOIN"
 	JoinFull  JoinType = "FULL JOIN"

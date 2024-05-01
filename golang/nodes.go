@@ -21,6 +21,8 @@ type CommentNode interface {
 // IdentNode interface represents a single identifier.
 type IdentNode interface {
 	Node
+	TypeNode
+	ExprNode
 	identNode()
 }
 
@@ -105,9 +107,9 @@ func (list ExprList) exprListNode() []ExprNode { return list }
 ////////////////////////////////////////////////////////////////////////////////
 
 // TypeNode interface represents a type literal node, or type name node.
-// - TypeName = Ident | QualifiedIdent
-// - TypeLit = ArrayType | StructType | PointerType | FuncType | InterfaceType |
-//	    SliceType | MapType | ChanType .
+//   - TypeName = Ident | QualifiedIdent
+//   - TypeLit = ArrayType | StructType | PointerType | FuncType | InterfaceType |
+//     SliceType | MapType | ChanType .
 type TypeNode interface {
 	Node
 	typeNode()
